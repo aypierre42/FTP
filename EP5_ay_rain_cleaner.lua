@@ -12,6 +12,14 @@ letters = {
 	"."
 }
 
+button = {
+	"-----------",
+	"|         |",
+	"|  CLEAN  |",
+	"|         |",
+	"-----------"
+}
+
 function enlevePluie()
 	if rs.getInput("top") == false then
 		p.setCursorPos(12,13)
@@ -37,16 +45,11 @@ p.clear()
 p.setCursorPos(11,1)
 p.write("Pluie cleaner 2000")
 
-p.setCursorPos(15,7)
-p.write("-----------")
-p.setCursorPos(15,8)
-p.write("|         |")
-p.setCursorPos(15,9)
-p.write("|  CLEAN  |")
-p.setCursorPos(15,10)
-p.write("|         |")
-p.setCursorPos(15,11)
-p.write("-----------")
+--Petite optimisation avec une boucle
+for k,v in ipairs(button) do
+	p.setCursorPos(15,6 + k)
+	p.write(v)
+end
 
 p.setCursorPos(15,18)
 p.write("Powered by")
