@@ -1,6 +1,16 @@
---Plus d'info ici : https://www.youtube.com/watch?v=4vH3Ap37Dew
-
 p = peripheral.wrap("back")
+
+letters = {
+	"Plus de pluis dans 3",
+	".",
+	".",
+	"2",
+	".",
+	".",
+	"1",
+	".",
+	"."
+}
 
 function enlevePluie()
 	if rs.getInput("top") == false then
@@ -13,24 +23,12 @@ function enlevePluie()
 		os.sleep(2)
 		rs.setOutput("left", false)	
 		p.setCursorPos(6,13)
-		p.write("Plus de pluie dans 3")
-		os.sleep(1)
-		p.write(".")
-		os.sleep(1)
-		p.write(".")
-		os.sleep(1)
-		p.write("2")
-		os.sleep(1)
-		p.write(".")
-		os.sleep(1)
-		p.write(".")
-		os.sleep(1)
-		p.write("1")
-		os.sleep(1)
-		p.write(".")
-		os.sleep(1)
-		p.write(".")
-		os.sleep(3)	
+		-- Petite optimisation grace à une boucle
+		for k,v in ipairs(letters) do
+			p.write(v);
+			os.sleep(1)
+		end
+		os.sleep(2)	
 		os.reboot()	
 	end
 end
