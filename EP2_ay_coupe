@@ -1,4 +1,5 @@
---Ce programme permet de découper un arbre seul. Plus d'info sur https://www.youtube.com/watch?v=rnhgpmMM6jM
+--Ce programme permet de découper un arbre seul. 
+--Plus d'info sur https://www.youtube.com/watch?v=rnhgpmMM6jM et https://www.youtube.com/watch?v=aPwSHFlwwq0
 
 --Initialisation slots turtle
 slotCharbon = 7
@@ -7,6 +8,7 @@ slotPlastic = 2
 slotTree = 3
 slotWaypoint = 8
 slotChest = 9
+slotBonemeal = 10
  
 --Permet à la turtle de refaiure le plein d'energie si la turtle à moins de 800 d'énergie
 function reEnergy()
@@ -34,6 +36,14 @@ function reTree()
         turtle.select(slotTree)
         if turtle.getItemCount(slotTree) < 2 then
                 turtle.suck()
+        end
+end
+
+--Permet de refaire le plein de Bonemeal
+function reBonemeal()
+        turtle.select(slotBonemeal)
+        if turtle.getItemCount(slotBonemeal) < 5 then
+                turtle.suckUp()
         end
 end
 
@@ -73,14 +83,23 @@ function reAndFill(init)
         turtle.turnRight()
         reTree()
         turtle.turnRight()
+        reBonemeal()
+        i = 0
         while isWaypoint() do
+                i = i+1
                 turtle.forward()
+                if i > 10 then
+                        break
+                end
         end
-        turtle.back()
+        if not isWaypoint() then
+                turtle.back()
+        end
         rePlant()
-        turtle.select(slotWood)
-        while not turtle.compare() do
-                os.sleep(1)
+        os.sleep(200)
+        turtle.select(slotBonemeal)
+        for i=0,4 do
+                turtle.place()
         end
 end
 
