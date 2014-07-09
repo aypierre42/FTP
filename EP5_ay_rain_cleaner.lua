@@ -1,7 +1,7 @@
 p = peripheral.wrap("back")
 
 letters = {
-	"Plus de pluis dans 3",
+	"Plus de pluie dans 3",
 	".",
 	".",
 	"2",
