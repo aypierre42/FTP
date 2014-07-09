@@ -1,7 +1,9 @@
 --Plus d'infos ici : https://www.youtube.com/watch?v=INQPAgFHHA4
 
 p = peripheral.wrap("top")
-     
+p.clear()
+p.setTextScale(5)
+
 text = {
 	"A",
 	"Y",
@@ -11,8 +13,6 @@ text = {
 	"O",
 	"T"
 }
-p.clear()
-p.setTextScale(5)
      
 while true do
 	p.clear()
