@@ -1,6 +1,7 @@
 --Utilisé pour ramasser du bois en masse
 --Pour plus de détail voir https://www.youtube.com/watch?v=aPwSHFlwwq0 et https://www.youtube.com/watch?v=2R0FLrJOyDw
 
+--Initialisation des slots utilisés par la turtle.
 slotTronc = 1
 slotRubber = 5
 slotSapling = 10
@@ -10,14 +11,15 @@ slotCharbon = 16
 
 coffreCoffreBase = vector.new(-80,64,19)
 
-
+--Cette fonction permet à la turtle de retrouver son emplacement d'origine si elle s'est égarée.
 function goTo(x,y,z)
-	local position = vector.new(gps.locate(2))
-	local home = vector.new(x,y,z)
-	local deplacement = home:sub(position)
-	local move = home:sub(vector.new(gps.locate(2)))
+	local position = vector.new(gps.locate(2))		--Recupère sa potition
+	local home = vector.new(x,y,z)				--Coordonnées de sa 'masison'
+	local deplacement = home:sub(position)			
+	local move = home:sub(vector.new(gps.locate(2)))	--Calcule de la distance à parcourir
 	
-	while move.y > 0 do
+	--Boucles permettant son déplacement
+	while move.y > 0 do					
 		turtle.up()
 		move = home:sub(vector.new(gps.locate(2)))
 	end
@@ -58,15 +60,17 @@ function goTo(x,y,z)
 	end
 end
 
+--Fonction permettant à la turtle d'aller aux coffres pour y déposer bois, plastique, sapling (1) et d'y refaire le plein 
+--de charbon et de bonemeal(2).
 function forestier()
 	while true do
 		goTo(coffreCoffreBase.x, coffreCoffreBase.y, coffreCoffreBase.z)
-		for i=1,4 do
+		for i=1,4 do					--(1)
 			turtle.select(i)
 			turtle.dropDown(turtle.getItemCount(i)-1)
 		end
-		for i=5,9 do
-			turtle.select(i)
+		for i=5,9 do					--(2)
+			turtle.select(i)			
 			turtle.dropUp(turtle.getItemCount(i)-1)
 		end
 		
@@ -140,6 +144,8 @@ function forestier()
 
 end
 
+--Fonction qui replante la sapling, met de la bonemeal et decoupe l'arbre si la turtle détecte un block devant lui.
+--Fonctionne uniquement avec des arbres droits.
 function ramasseRangee()
 	for i=1,6 do
 		turtle.select(slotSapling)
